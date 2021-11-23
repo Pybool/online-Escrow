@@ -50,7 +50,7 @@ router.post('/order/publish',  (req:express.Request, res:express.Response, next)
                 message: "Please provide the token",
             });
         }
-    
+        console.log("internet ",req.headers)
         const theToken = req.headers.authorization.split(' ')[1];
         const decoded = jwt.verify(theToken, 'the-super-strong-secrect');
         const parameters = [ decoded.id ]
@@ -74,13 +74,15 @@ router.post('/order/publish',  (req:express.Request, res:express.Response, next)
                             function getRndInteger(min:number, max:number) {
                                 return Math.floor(Math.random() * (max - min + 1) ) + min;
                             }
+                            console.log("Publish order ",req.body)
                             const order_id = "OF-"+Math.round(new Date().getTime()/getRndInteger(2020,2070))
                             const order_publisher = decoded.id
-                            const commodity = req.body.commodity
-                            const quantity = req.body.quantity
-                            const price = req.body.price
-                            const timestamp = new Date().getTime()
-                            
+                            const commodity = req.body.reservation.crypto
+                            const quantity = req.body.reservation.qty
+                            const price = req.body.reservation.price
+                            const timestamp = Math.floor(new Date().getTime()/1000)
+                            console.log("--------------------------------------------------------------> ",timestamp)
+                            console.log(commodity,quantity,price)
                             interface IPublishOrder{
                                 order_id:string,
                                 order_publisher:string,

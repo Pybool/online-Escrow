@@ -1,25 +1,26 @@
 
 let TEMP_USER_QUERIES =  {
-    INSERT_USERS: "INSERT INTO tempusers (public_id,firstname,middlename,lastname,email,telephone,\
-                    bankname,bvn,acc_no,password,createdAt,updatedAt) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+    INSERT_USERS: "INSERT INTO tempusers (public_id,firstname,middlename,lastname,username,email,telephone,\
+                    password,createdAt,updatedAt) VALUES(?,?,?,?,?,?,?,?,?,?)",
     MIGRATE_USERS: "SELECT * FROM tempusers WHERE public_id=?;",
     DELETE_USER:  "DELETE FROM tempusers WHERE public_id=?;",
     CHECK_EMAIL_EXISTS: "SELECT email FROM tempusers WHERE email=?",
-    CHECK_BVN_EXISTS: "SELECT bvn from tempusers WHERE bvn=?",
+    USERNAME_EXISTS: "SELECT username from tempusers WHERE username=?",
     CHECK_ACC_NO_EXISTS: "SELECT acc_no from tempusers WHERE acc_no=?",
+    GET_USER_BY_ID:"SELECT email FROM tempusers WHERE public_id=?"
 
      }
 
      
 let USER_QUERIES =  {
-    INSERT_USERS: "INSERT INTO users (public_id,firstname,middlename,lastname,email,telephone,\
-                    bankname,bvn,acc_no,password,createdAt,updatedAt) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+    INSERT_USERS: "INSERT INTO users (public_id,firstname,middlename,lastname,username,email,telephone,\
+                   password,createdAt,updatedAt) VALUES(?,?,?,?,?,?,?,?,?,?)",
     GET_USER:     "SELECT * FROM users WHERE public_id=?;",
     DELETE_USERS: "DELETE FROM users WHERE public_id=?;",
     CHECK_EMAIL_EXISTS: "SELECT email FROM users WHERE email=?",
     CHECK_BVN_EXISTS: "SELECT bvn from users WHERE bvn=?",
     CHECK_ACC_NO_EXISTS: "SELECT acc_no from users WHERE acc_no=?",
-    GET_EMAIL_PASS: "SELECT public_id,email,password FROM users WHERE email=?"
+    GET_EMAIL_PASS: "SELECT public_id,email,username,password FROM users WHERE email=?"
 
      }
 
@@ -27,8 +28,8 @@ let ORDER_POOL_QUERIES =  {
     PUBLISH_ORDER: "INSERT INTO orderpools (order_id,order_publisher,commodity,quantity,price,timestamp,createdAt,updatedAt) VALUES(?,?,?,?,?,?,?,?)",
     CLEAN_ORDER_TABLE: `DELETE FROM orderpools WHERE (?-timestamp)/(60*60)/1000 >=0.05;`,            
     RESERVE_ORDER_DATA: "SELECT * from orderpools WHERE order_id=?;",
-    GET_PARTIES: "SELECT order_id,order_publisher WHERE order_id=?;"
-
+    GET_PARTIES: "SELECT order_id,order_publisher WHERE order_id=?;",
+    GET_RESERVATIONS:"SELECT * from orderpools ORDER BY id DESC LIMIT ? ;"
     }
 
 let PROC_POOL_QUERIES =  {

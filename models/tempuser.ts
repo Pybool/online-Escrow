@@ -10,11 +10,9 @@ interface TempUserAttributes {
   firstname: string;
   middlename:string;
   lastname:string;
+  username:string;
   email: string;
   telephone:string;
-  bankname:string;
-  bvn:number;
-  acc_no:number;
   password: string;
 }
 
@@ -30,11 +28,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
     firstname!: string;
     middlename!: string;
     lastname!: string;
+    username!:string;
     email!: string;
     telephone!: string;
-    bankname!: string;
-    bvn!: number;
-    acc_no!:number;
     password!: string;
     
     static associate(models: any) {
@@ -63,6 +59,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -70,19 +70,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     }, 
     telephone: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    bankname: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    bvn: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      unique: true
-    }, 
-    acc_no: {
-      type: DataTypes.BIGINT,
       allowNull: false
     },
     password: {

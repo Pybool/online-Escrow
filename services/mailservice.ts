@@ -21,6 +21,8 @@ var mailOptions_send_generated_token:{from: string; to: string; subject: string;
 
 var mailOptions_send_seller_joined_notification:{from: string; to: string; subject: string; text: string; html: string;}
 
+// var mailOptions_resend_reg_mail: {from: string; to: string; subject: string; text: string; html: string;}
+
 function mailOptions_args(public_id:string,data?:any){
     console.log('args', data)
         mailOptions_register_user = {
@@ -164,6 +166,35 @@ function mailOptions_args(public_id:string,data?:any){
     };
     // return mailOptions_order_reserved
 
+    // mailOptions_resend_reg_mail = {
+    //     from: 'uchihamadara@gedo.com"',
+    //     to: 'ekoemmanuelgodcoder@gmail.com',
+    //     subject: 'Seller Joined Your Transaction',
+    //     text: '',
+    //     html: `
+        
+    //     <html>
+    //         <header>
+                
+    //             <title>Seller Joined Your Transaction</title>
+    //             <meta charset="utf-8">
+    //             <meta name="viewport" content="width=device-width, initial-scale=1">
+    //             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    //             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    //             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    //             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                
+    //         </header>
+    //         <body>
+    //             <h1>Seller Joined Your Transaction</h1>
+    //             <br>
+    //             <p>Seller ${data[1]} Joined Your Transaction ${data[0].order_id} </p>
+    //         </body>
+            
+    //     </html>
+    //         `
+    // };
+
     return mailOptions_order_reserved
 }
 
@@ -182,6 +213,9 @@ async function sendMail(mailOption:any,event:string){
         if (event=="seller.joined.event"){
             mailOption = mailOptions_send_seller_joined_notification
         }
+        // if (event=="resend.mail.event"){
+        //     mailOption = mailOptions_resend_reg_mail
+        // }
         await transporter.sendMail(mailOption, function (error: any, info: { response: string; }) {
             if (error) {
                 console.log(error);

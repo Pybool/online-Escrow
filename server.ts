@@ -11,7 +11,7 @@ const authentication = require('./routes/authentication')
 const publishOrder = require('./routes/publishOrder')
 const reserveOrder = require('./routes/reserveOrder')
 const transaction = require('./routes/transaction')
-const webhooks = require('./routes/webhooks')
+// const webhooks = require('./routes/webhooks')
 const bankdetails_verification = require('./routes/bankdetails_verification')
 
 const app = express();
@@ -23,7 +23,7 @@ app.use('/api', authentication);
 app.use('/api',publishOrder);
 app.use('/api',reserveOrder);
 app.use('/api',transaction);
-app.use('/api',webhooks);
+// app.use('/api',webhooks);
 app.use('/api',bankdetails_verification)
 
 const port = process.env.PORT || 3000;

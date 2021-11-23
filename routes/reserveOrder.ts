@@ -40,6 +40,39 @@ router.get('/proc_pool/vaccum',  (req:express.Request, res:express.Response, nex
 
 })
 
+router.get('/order/reservations/list',  (req:express.Request, res:express.Response, next) => {
+    
+    let p = new Promise((resolve, reject) => {
+        // if(
+        //     !req.headers.authorization ||
+        //     !req.headers.authorization.startsWith('Bearer') ||
+        //     !req.headers.authorization.split(' ')[1]
+        // ){
+        //     return res.status(422).json({
+        //         message: "Please provide the token",
+        //     });
+        // }
+    
+        // const theToken = req?.headers?.authorization?.split(' ')[1];
+        // const decoded = jwt.verify(theToken, 'the-super-strong-secrect');
+        // const parameters = [ decoded.id ]
+        console.log("Request ",req.query)
+        var parameters = [ Number(req.query.limit) ]
+                sequelize.query(parseSql(ORDER_POOL_QUERIES.GET_RESERVATIONS,parameters)).then((results: any,error:any) => {
+                    
+                    if (results[0][0]){
+                        return res.send({ "status": true,  message: `${results[0].length} Reservations(s) fetched`, data:results[0] });
+                    }
+                    else{
+
+                        return res.send({ "status": false,  message: `No reservation was found` });
+                    }
+                    
+                    
+                })
+        })
+})
+
 
 router.post('/order/reserve',  (req:express.Request, res:express.Response, next) => {
 
