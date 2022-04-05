@@ -13,4 +13,4 @@
 <p>To run:</p>
 <p>npm init<br>npm run dev</p>
 
-<p>Cypress test repo</p>: <a href='https://github.com/Pybool/Online-Escrow-cypress-test'>https://github.com/Pybool/Online-Escrow-cypress-test</a>
+<p>Cypress test repo: <a href='https://github.com/Pybool/Online-Escrow-cypress-test'>https://github.com/Pybool/Online-Escrow-cypress-test</a></p>
